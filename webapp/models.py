@@ -11,8 +11,13 @@ class Work(models.Model):
         ('done', 'Сделано')
     ]
     description = models.CharField(max_length=100, null=False, blank=False, verbose_name="Описание")
-    status = models.CharField(max_length=2, choices=status_choices, default=new, verbose_name="Статус работы")
+    status = models.CharField(max_length=20, choices=status_choices, default=new, verbose_name="Статус работы")
     d_date = models.DateField(auto_created=False, verbose_name="дата сдачи")
 
     def __str__(self):
         return f"{self.id}. {self.description} - {self.status} - {self.d_date}"
+
+    class Meta:
+        db_table = "works"
+        verbose_name = "Задача"
+        verbose_name_plural = "Задачи"
