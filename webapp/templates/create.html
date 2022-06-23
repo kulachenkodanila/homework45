@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create</title>
+</head>
+<body>
+
+<h1>Create Article</h1>
+
+<form action="/works/add/" method="post">
+    {% csrf_token %}
+    <label>Title:</label><br/>
+    <input type="text" name="description"/><br/>
+    <select name="status">
+        {% for value, status in statuses %}
+            <option value="{{ value }}">{{ status }}</option>
+        {% endfor %}
+    </select>
+    <br/>
+    <input type="submit" value="Send"/>
+</form>
+<a href="/">На главную</a>
+</body>
+</html>

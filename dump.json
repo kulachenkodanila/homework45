@@ -1,0 +1,20 @@
+[
+{
+    "model": "webapp.work",
+    "pk": 1,
+    "fields": {
+        "description": "1111",
+        "status": "nw",
+        "d_date": "2022-06-23"
+    }
+},
+{
+    "model": "webapp.work",
+    "pk": 2,
+    "fields": {
+        "description": "2222",
+        "status": "in_progress",
+        "d_date": "2022-06-23"
+    }
+}
+]
