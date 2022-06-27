@@ -16,7 +16,7 @@
         {% for work in works %}
             <h3>{{ work.description }}</h3> <span>{{ work.status }} - {{ work.get_status_display }}</span>
             <h4>{{ work.titile }}</h4>
-            <p><a href="work/?pk={{ work.pk }}">Подробнее</a></p>
+            <p><a href="work/{{ work.pk }}/">Подробнее</a></p>
         {% endfor %}
 </body>
 </html>

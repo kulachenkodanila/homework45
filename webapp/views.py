@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
 from webapp.models import Work, status_choices
@@ -10,9 +10,9 @@ def index_view(request):
     return render(request, "index.html", context)
 
 
-def work_view(request):
-    pk = request.GET.get("pk")
-    work = Work.objects.get(pk=pk)
+def work_view(request, **kwargs):
+    pk = kwargs.get("pk")
+    work = get_object_or_404(Work, pk=pk)
     return render(request, "work_view.html", {"work": work})
 
 
@@ -25,5 +25,5 @@ def create_work(request):
         d_date = request.POST.get("d_date")
         title = request.POST.get("title")
         new_work = Work.objects.create(description=description, status=status,  d_date=d_date, title=title)
-        context = {"work": new_work}
-        return render(request, "work_view.html", context)
+        return redirect("work_view.html", pk=new_work.pk)
+
