@@ -23,6 +23,7 @@ def create_work(request):
         description = request.POST.get("description")
         status = request.POST.get("status")
         d_date = request.POST.get("d_date")
-        new_work = Work.objects.create(description=description, status=status, d_date=d_date)
+        title = request.POST.get("title")
+        new_work = Work.objects.create(description=description, status=status,  d_date=d_date, title=title)
         context = {"work": new_work}
         return render(request, "work_view.html", context)
