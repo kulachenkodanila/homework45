@@ -10,13 +10,17 @@
 
 <form action="/works/add/" method="post">
     {% csrf_token %}
-    <label>Title:</label><br/>
+    <label>Description:</label><br/>
     <input type="text" name="description"/><br/>
+    <label>Status:</label><br/>
     <select name="status">
         {% for value, status in statuses %}
             <option value="{{ value }}">{{ status }}</option>
         {% endfor %}
     </select>
+    <br/>
+    <label>Title:</label><br/>
+    <input type="text" name="title"/><br/>
     <br/>
     <input type="submit" value="Send"/>
 </form>

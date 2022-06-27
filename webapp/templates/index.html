@@ -14,7 +14,8 @@
         <a href="works/add/">Создание задачи</a>
         <h1>Задачи</h1>
         {% for work in works %}
-            <h3>{{ work.description }}</h3>
+            <h3>{{ work.description }}</h3> <span>{{ work.status }} - {{ work.get_status_display }}</span>
+            <h4>{{ work.titile }}</h4>
             <p><a href="work/?pk={{ work.pk }}">Подробнее</a></p>
         {% endfor %}
 </body>
