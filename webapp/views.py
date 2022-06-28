@@ -25,5 +25,5 @@ def create_work(request):
         d_date = request.POST.get("d_date")
         title = request.POST.get("title")
         new_work = Work.objects.create(description=description, status=status,  d_date=d_date, title=title)
-        return redirect("work_view.html", pk=new_work.pk)
+        return redirect("work_view", pk=new_work.pk)
 
