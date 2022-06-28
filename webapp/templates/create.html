@@ -1,33 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Create</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}Создание задачи{% endblock %}
 
-<h1>Create Article</h1>
-
-<form action="/works/add/" method="post">
-    {% csrf_token %}
-    <label>Description:</label><br/>
-    <input type="text" name="description"/><br/>
-    <label>Status:</label><br/>
-    <select name="status">
-        {% for value, status in statuses %}
-            <option value="{{ value }}">{{ status }}</option>
-        {% endfor %}
-    </select>
-    <br/>
-    <label for="date">Дата: </label>
-    <br/>
-    <input type="date" id="date" name="d_date"/>
-    <br/>
-    <label>Title:</label><br/>
-    <input type="text" name="title"/><br/>
-    <br/>
-    <input type="submit" value="Send"/>
-</form>
-<a href="/">На главную</a>
-</body>
-</html>
+{% block content %}
+    <h1>Create Work</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <label>Description:</label><br/>
+        <input type="text" name="description"/><br/>
+        <label>Status:</label><br/>
+        <select name="status">
+            {% for value, status in statuses %}
+                <option value="{{ value }}">{{ status }}</option>
+            {% endfor %}
+        </select>
+        <br/>
+        <label for="date">Дата: </label>
+        <br/>
+        <input type="date" id="date" name="d_date"/>
+        <br/>
+        <label>Title:</label><br/>
+        <input type="text" name="title"/><br/>
+        <br/>
+        <input type="submit" value="Send"/>
+    </form>
+    <a href="{% url "index" %}">На главную</a>
+{% endblock %}
