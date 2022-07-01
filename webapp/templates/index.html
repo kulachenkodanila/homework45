@@ -6,9 +6,18 @@
 {% endblock %}
 {% block content %}
     <h1>Задачи</h1>
-    {% for work in works %}
-        <h3>{{ work.description }}</h3>
-        <p><a href="{% url "work_view" work.pk %}">Подробнее</a></p>
-    {% endfor %}
-
+        <div class="row">
+            {% for work in works %}
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ work.description }}</h5>
+                            <a href="{% url "work_view" work.pk %}" class="card-link">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
 {% endblock %}
+
+

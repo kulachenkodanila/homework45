@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
 from webapp.models import Work, status_choices
+from webapp.templates.forms import To_DoForm
 
 
 def index_view(request):
@@ -18,12 +19,24 @@ def work_view(request, **kwargs):
 
 def create_work(request):
     if request.method == "GET":
-        return render(request, "create.html", {"statuses": status_choices})
+        form = To_DoForm()
+        return render(request, "create.html", {"form": form})
     else:
-        description = request.POST.get("description")
-        status = request.POST.get("status")
-        d_date = request.POST.get("d_date")
-        title = request.POST.get("title")
-        new_work = Work.objects.create(description=description, status=status,  d_date=d_date, title=title)
-        return redirect("work_view", pk=new_work.pk)
+        form = To_DoForm(data=request.POST)
+        if form.is_valid():
+            description = form.cleaned_data.get("description")
+            status = form.cleaned_data.get("status")
+            d_date = form.cleaned_data.get("d_date")
+            title = form.cleaned_data.get("title")
+            new_work = Work.objects.create(description=description, status=status, d_date=d_date, title=title)
+            return redirect("work_view", pk=new_work.pk)
+        return render(request, "create.html", {"form": form})
 
+
+def delete_work(request, pk):
+    work = get_object_or_404(Work, pk=pk)
+    if request.method == "GET":
+        pass
+    else:
+        work.delete()
+        return redirect("index")
