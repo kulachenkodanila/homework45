@@ -1,5 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
+
+status_choices = [
+    ('new', 'Новая'),
+    ('in_progress', 'В процессе'),
+    ('done', 'Сделано')]
+
+
 # Create your views here.
 from webapp.models import Work, status_choices
 from webapp.templates.forms import To_DoForm
@@ -40,3 +47,26 @@ def delete_work(request, pk):
     else:
         work.delete()
         return redirect("index")
+
+
+def update_work(request, pk):
+    work = get_object_or_404(Work, pk=pk)
+    if request.method == "GET":
+        form = To_DoForm(initial={
+            "description": work.description,
+            "status": work.status,
+            "d_date": work.d_date,
+            "title": work.title
+        })
+        return render(request, "update.html", {"form": form})
+    else:
+        form = To_DoForm(data=request.POST)
+        if form.is_valid():
+            work.description = form.cleaned_data.get("description")
+            work.status = form.cleaned_data.get("status")
+            work.d_date = form.cleaned_data.get("d_date")
+            work.title = form.cleaned_data.get("title")
+            work.save()
+            return redirect("article_view", pk=work.pk)
+        return render(request, "update.html", {"form": form})
+
