@@ -8,8 +8,8 @@ status_choices = [
 
 
 # Create your views here.
-from webapp.models import Work, status_choices
-from webapp.templates.forms import To_DoForm
+from webapp.models import Work
+from webapp.forms import To_DoForm
 
 
 def index_view(request):
